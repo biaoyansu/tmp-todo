@@ -64,7 +64,7 @@ function render () {
     this.list.innerHTML = '';
   else
     this.list.innerHTML = holder;
-
+  
   /*通过循环分类数据生成每一条分类元素*/
   cat_list = cat_list || [];
 
