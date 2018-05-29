@@ -1,0 +1,228 @@
+<style>
+  * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: sans-serif;
+  }
+
+  form {
+    margin: 0;
+  }
+
+  form > * {
+    margin-bottom: 5px;
+  }
+
+  hr {
+    display: block;
+    height: 3px;
+    width: 100%;
+    border: 0;
+    background: rgba(0, 0, 0, .2);
+  }
+
+  input, button, select {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid rgba(0, 0, 0, .1);
+  }
+
+  select {
+    height: 40px;
+    width: 100%;
+    font-size: 15px;
+    border-radius: 0;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  .block {
+    display: block;
+    width: 100%;
+  }
+
+  .cat-item input[disabled] {
+    background: transparent;
+    border: 0;
+    font-size: 1rem;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(0, 0, 0, .1);
+    padding: 10px;
+  }
+
+  .row {
+    font-size: 0;
+  }
+
+  .col {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1rem;
+  }
+
+  #todo-form input,
+  #todo-form button {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, .1);
+  }
+
+  #todo-form input {
+    width: 80%;
+  }
+
+  #todo-form button {
+    width: 20%;
+    border-left: 0;
+  }
+
+  #todo-list .checkbox {
+    width: 10%;
+  }
+
+  #todo-list .detail {
+    width: 60%;
+  }
+
+  #todo-list .tool-set {
+    width: 30%;
+  }
+
+  .sidebar {
+    width: 30%;
+  }
+
+  .main {
+    width: 70%;
+    padding-left: 10px;
+  }
+
+  .tool-set {
+    text-align: right;
+  }
+
+  .todo-item .tool-set * {
+    padding: 4px;
+    border: 1px solid rgba(0, 0, 0, .1);
+  }
+
+  .todo-item {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .todo-item > * {
+    vertical-align: middle;
+  }
+
+  .cat-item {
+    position: relative;
+    padding: 5px;
+    cursor: default;
+  }
+
+  .cat-item .tool-set {
+    font-size: .7rem;
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    display: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .cat-item .tool-set > * {
+    display: inline-block;
+    padding: 0 2px;
+  }
+
+  .cat-item .title {
+    font-size: .9rem;
+  }
+
+  .cat-item:hover {
+    background: rgba(0, 0, 0, .06);
+  }
+
+  .cat-item.active {
+    background: rgba(0, 0, 0, .7);
+    color: #fff;
+  }
+
+  .cat-item:hover .tool-set {
+    display: inline-block;
+  }
+
+  .empty-holder {
+    font-size: .9rem;
+    opacity: .5;
+    text-align: center;
+    padding: 10px;
+  }
+</style>
+<div class="container">
+  <h1>Biao Todo</h1>
+  <div class="row">
+    <div class="col sidebar">
+      <div class="sidebar-title">分组</div>
+      <hr>
+      <div id="cat-list" class="cat-list">
+        <!--<div class="cat-item">-->
+        <!--<input type="text" value="默认" disabled>-->
+        <!--</div>-->
+      </div>
+
+      <form id="cat-form" hidden>
+        <input type="hidden" name="id">
+        <input type="text" value="yo" class="block" name="title" autocomplete="off">
+        <button type="submit">完成</button>
+        <button type="button" data-action="cancel">取消</button>
+      </form>
+
+      <div>
+        <button id="add-cat" class="block">+</button>
+      </div>
+    </div>
+    <div class="col main">
+      <form id="todo-form" class="row">
+        <input type="hidden" name="id">
+        <input id="todo-input" type="text" name="title" class="col" autocomplete="off">
+        <button class="col">添加</button>
+        <select id="cat-select" name="cat_id" hidden></select>
+      </form>
+      <div id="todo-list">
+        <div class="incomplete"></div>
+        <hr>
+        <div class="completed"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="Util/helper.js"></script>
+<script src="Util/store.js"></script>
+
+<script src="Api/BaseApi.js"></script>
+<script src="Api/TaskApi.js"></script>
+<script src="Api/CatApi.js"></script>
+
+<script src="Ui/TaskUi.js"></script>
+<script src="Ui/CatUi.js"></script>
+
+<script src="index.js"></script>
