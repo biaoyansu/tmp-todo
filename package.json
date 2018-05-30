@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx webpack -p",
-    "start": "npx webpack -wd",
+    "build": "./node_modules/.bin/webpack -p",
+    "start": "./node_modules/.bin/webpack webpack -wd",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
