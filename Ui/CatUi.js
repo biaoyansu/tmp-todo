@@ -1,4 +1,6 @@
-window.CatUi = CatUi;
+var cat        = require('../Api/CatApi');
+var helper     = require('../Util/helper');
+module.exports = CatUi;
 
 /*分组界面管理*/
 function CatUi (config) {
@@ -17,7 +19,7 @@ function CatUi (config) {
   this.add_cat  = document.querySelector(c.add_selector)
   this.cat_form = document.querySelector(c.form_selector);
 
-  this._api              = new CatApi();
+  this._api = cat;
 
   this.updating_cat_item = null; // 正在更新的那一条分组元素
   this._api.on_sync      = c.on_sync;
@@ -64,7 +66,7 @@ function render () {
     this.list.innerHTML = '';
   else
     this.list.innerHTML = holder;
-  
+
   /*通过循环分类数据生成每一条分类元素*/
   cat_list = cat_list || [];
 

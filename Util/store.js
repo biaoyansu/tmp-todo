@@ -1,4 +1,4 @@
-window.store = {
+module.exports = {
   set : set,
   get : get,
 }

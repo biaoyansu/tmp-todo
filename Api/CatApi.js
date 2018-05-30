@@ -1,4 +1,23 @@
-window.CatApi = CatApi;
+var instance;
+var BaseApi = require('./BaseApi')
+
+init();
+
+function init () {
+  /*继承隐性属性（也就是原型prototype）*/
+  CatApi.prototype             = Object.create(BaseApi.prototype);
+  CatApi.prototype.constructor = CatApi;
+
+  CatApi.prototype.add    = add;
+  CatApi.prototype.remove = remove;
+  CatApi.prototype.update = update;
+  CatApi.prototype.read   = read;
+
+  if (!instance)
+    instance = new CatApi();
+
+  return instance;
+}
 
 function CatApi () {
   this._model_name = 'cat';
@@ -20,21 +39,12 @@ function CatApi () {
 
   this.default_max_id = this.default_list.length;
 
-
+  /*加载初始数据，要么是localStorage中已有的数据，要么是默认数据，
+  也就是this.default_list和this.default_max_id*/
   this.load_data();
 
   this.reverse_direction = true;
 }
-
-/*继承隐性属性（也就是原型prototype）*/
-CatApi.prototype             = Object.create(BaseApi.prototype);
-CatApi.prototype.constructor = CatApi;
-
-CatApi.prototype.add    = add;
-CatApi.prototype.remove = remove;
-CatApi.prototype.update = update;
-CatApi.prototype.read   = read;
-
 
 function add (row) {
   if (!row.title)
@@ -63,3 +73,4 @@ function read () {
   return this.$read();
 }
 
+module.exports = instance;

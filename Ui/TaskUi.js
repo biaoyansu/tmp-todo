@@ -1,4 +1,8 @@
-window.TaskUi = TaskUi;
+var task = require('../Api/TaskApi');
+// var cat     = require('../Api/CatApi');
+
+var helper     = require('../Util/helper');
+module.exports = TaskUi;
 
 function TaskUi (config) {
   var default_config = {
@@ -20,7 +24,7 @@ function TaskUi (config) {
   this.completed_list  = this.list.querySelector(c.completed_list_selector);
   this.incomplete_list = this.list.querySelector(c.incomplete_list_selector);
   /*私有，不应该直接调用，仅限此文件内部调用*/
-  this._api         = new TaskApi();
+  this._api         = task;
   this._api.on_sync = c.on_sync;
 }
 
@@ -84,12 +88,13 @@ function detect_add () {
     }
     /*更新界面*/
     me.render(row.cat_id);
+
     /*清空输入框*/
     me.input.value = '';
 
 
     if (cb)
-      cb();
+      cb(row);
   });
 }
 

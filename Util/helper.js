@@ -1,4 +1,4 @@
-window.helper = {
+module.exports = {
   get_form_data : get_form_data,
   set_form_data : set_form_data,
   clear_form    : clear_form,
@@ -9,7 +9,7 @@ window.helper = {
  * @param String|HTMLFormElement 选择器或表单元素
  * @return Object e.g. {name: 'whh', age: 18}
  * */
-function get_form_data(form) {
+function get_form_data (form) {
   /*看看是不是选择器，如果是选择器就一定是字符串。*/
   if (typeof form == 'string')
     form = document.querySelector(form); // 通过选择器拿到元素对象
@@ -28,21 +28,21 @@ function get_form_data(form) {
           case 'password':
           case 'hidden':
             /*如果是字符类数据，使用用户输入的值*/
-            data[input.name] = input.value;
+            data[ input.name ] = input.value;
             break;
           case 'radio':
           case 'checkbox':
             /*如果是打钩类数据，使用打钩的状态（打|没打）*/
-            data[input.name] = input.checked;
+            data[ input.name ] = input.checked;
             break;
         }
         // console.log(input);
         break;
       case 'TEXTAREA':
-        data[input.name] = input.value;
+        data[ input.name ] = input.value;
         break;
       case 'SELECT':
-        data[input.name] = input.value;
+        data[ input.name ] = input.value;
         break;
     }
   });
@@ -56,7 +56,7 @@ function get_form_data(form) {
  * @param Object 要设置的数据 e.g. {name: 'whh', age: 18}
  * @return void
  * */
-function set_form_data(form, data) {
+function set_form_data (form, data) {
   /*看看是不是选择器，如果是选择器就一定是字符串。*/
   if (typeof form == 'string')
     form = document.querySelector(form); // 通过选择器拿到元素对象
@@ -64,7 +64,7 @@ function set_form_data(form, data) {
   /*遍历数据对象*/
   for (var key in data) {
     /*缓存当前属性的值*/
-    var value = data[key];
+    var value = data[ key ];
     /*找到当前属性在表单中对应的input*/
     var input = form.querySelector(`[name=${key}]`);
 
@@ -95,7 +95,7 @@ function set_form_data(form, data) {
  * 将所有radio和checkbox设为unchecked
  * @param String|HTMLFormElement 选择器或表单元素
  * */
-function clear_form(form) {
+function clear_form (form) {
   /*看看是不是选择器，如果是选择器就一定是字符串。*/
   if (typeof form == 'string')
     form = document.querySelector(form); // 通过选择器拿到元素对象

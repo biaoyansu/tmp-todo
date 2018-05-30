@@ -1,6 +1,9 @@
-window.BaseApi = BaseApi;
+var helper     = require('../Util/helper')
+var store      = require('../Util/store')
+module.exports = BaseApi;
 
 function BaseApi () {
+  this.yo                = 1;
   this.default_list      = [];
   this.default_max_id    = 0;
   this.reverse_direction = false;
@@ -16,6 +19,11 @@ BaseApi.prototype.sync_to   = sync_to;
 BaseApi.prototype.sync_from = sync_from;
 BaseApi.prototype.load_data = load_data;
 
+/**
+ * 加载初始数据
+ * 要么是localStorage中已有的数据，要么是默认数据，
+ * 也就是this.default_list和this.default_max_id
+ * */
 function load_data () {
   this.sync_from();
 }
@@ -116,6 +124,8 @@ function sync_from () {
 
   if (!old_list || !old_list.length) {
     this.list = this.default_list;
+  } else {
+    this.list = old_list;
   }
 
   this.max_id = store.get(this._model_name + '-max_id') || this.default_max_id;
